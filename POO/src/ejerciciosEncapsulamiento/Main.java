@@ -50,7 +50,7 @@ public class Main {
             }
             
             System.out.println("\nEl área del cuadrilatero es: " + cuadrilateros[i].calcularArea());
-            System.out.println("\nEl perimetro del cuadrilatero es: " + cuadrilateros[i].calcularPerimetro());
+            System.out.println("El perimetro del cuadrilatero es: " + cuadrilateros[i].calcularPerimetro());
 
         }
         System.out.println("\nEl cuadrilatero de mayor perimetro es: " + mayorPerimetro(cuadrilateros));
