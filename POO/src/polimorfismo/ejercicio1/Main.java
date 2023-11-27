@@ -70,9 +70,9 @@ public class Main {
     }
 
     public static void mostrarPoligonos() {
-        for (int i = 0; i <= poligonos.size(); i++) {
-            System.out.println(poligonos.toString());
-            System.out.println("\nArea: " + poligonos.get(i).calcularArea());
+        for (Poligono poli: poligonos) {
+            System.out.println(poli.toString());
+            System.out.println("\nArea: " + poli.calcularArea());
             System.out.println("");
         }
     }
