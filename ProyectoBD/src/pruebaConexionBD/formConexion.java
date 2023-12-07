@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+package pruebaConexionBD;
 
-/**
- *
- * @author Arequipa-docente
- */
-public class PruebaConexion extends javax.swing.JFrame {
-    
-    
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form PruebaConexion
-     */
-    public PruebaConexion() {
+public class formConexion extends javax.swing.JFrame {
+
+    public static final String URL = "jdbc:mysql://localhost:3306/escuela";
+    public static final String usuario = "root";
+    public static final String contrasena = "root";
+    
+    public formConexion() {
         initComponents();
     }
 
@@ -27,14 +23,14 @@ public class PruebaConexion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnConeccion = new javax.swing.JButton();
+        btnConectar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnConeccion.setText("Conectar");
-        btnConeccion.addActionListener(new java.awt.event.ActionListener() {
+        btnConectar.setText("Conectar");
+        btnConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConeccionActionPerformed(evt);
+                btnConectarActionPerformed(evt);
             }
         });
 
@@ -43,26 +39,40 @@ public class PruebaConexion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btnConeccion)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(145, 145, 145)
+                .addComponent(btnConectar)
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(btnConeccion)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(113, 113, 113)
+                .addComponent(btnConectar)
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConeccionActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnConeccionActionPerformed
+    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
+        // Creamos un objeto del tipo connection y lo igualamos al método getConnection
+        Connection conexion = getConnection();
+    }//GEN-LAST:event_btnConectarActionPerformed
 
+    public Connection getConnection(){
+        Connection conexion = null;
+        //Para capturar las excepciones en caso la BD falle:
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
+            /*Para conectarnos a la base de datos. getConnection es un método get, 
+            entonces debemos guardarla dentro de conexion*/
+            conexion = (Connection) DriverManager.getConnection(URL, usuario, contrasena);
+            JOptionPane.showMessageDialog(null, "Conexión exitosa");
+        }catch(Exception ex){
+            System.err.println("Error" + ex);
+        }
+        return conexion;
+    }
     /**
      * @param args the command line arguments
      */
@@ -80,25 +90,25 @@ public class PruebaConexion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PruebaConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PruebaConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PruebaConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PruebaConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(formConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PruebaConexion().setVisible(true);
+                new formConexion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConeccion;
+    private javax.swing.JButton btnConectar;
     // End of variables declaration//GEN-END:variables
 }
